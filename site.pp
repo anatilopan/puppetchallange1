@@ -2,7 +2,7 @@
 
 # - [x] Create a proxy to redirect requests for https://domain.com to 10.10.10.10 and redirect requests for https://domain.com/resoure2 to 20.20.20.20.
 # - [x] Create a forward proxy to log HTTP requests going from the internal network to the Internet including: request protocol, remote IP and time take to serve the request.
-# - [ ] (Optional) Implement a proxy health check.
+# - [x] (Optional) Implement a proxy health check.
 
 node default {
   # include nginx # Not used as I have to set some things manually.
@@ -35,16 +35,21 @@ node default {
 
   nginx::resource::upstream { 'proxytoext':
     # Used for the external resources trough proxy.
+    # Added passive health checks.
     members => {
       '142.250.185.238:80' => { # one of google`s ip-s
-        server => '142.250.185.238',
-        port   => 80,
-        weight => 1,
+        server       => '142.250.185.238',
+        port         => 80,
+        max_fails    => 3,
+        fail_timeout => '30s',
+        weight       => 1,
       },
       '172.217.167.174:80' => { # one of google`s ip-s
-        server => '172.217.167.174',
-        port   => 80,
-        weight => 2,
+        server       => '172.217.167.174',
+        port         => 80,
+        max_fails    => 3,
+        fail_timeout => '30s',
+        weight       => 2,
       },
     },
   }
