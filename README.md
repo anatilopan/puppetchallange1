@@ -8,12 +8,12 @@ Deadline 2023-01-20T15:00:00+02:00
 
 - [x] Create a proxy to redirect requests for https://domain.com to 10.10.10.10 and redirect requests for https://domain.com/resoure2 to 20.20.20.20.
 - [x] Create a forward proxy to log HTTP requests going from the internal network to the Internet including: request protocol, remote IP and time take to serve the request.
-- [ ] (Optional) Implement a proxy health check.
+- [x] (Optional) Implement a proxy health check.
 
 ## Notes
 
-Puppet Server: 10.1.1.40 puppetserver.local.aphios.ro
-Puppet Client: 10.1.1.41 puppetclient.local.aphios.ro domain.com ext.domain.com
+- Puppet Server: 10.1.1.40 puppetserver.local.aphios.ro
+- Puppet Client: 10.1.1.41 puppetclient.local.aphios.ro domain.com ext.domain.com
 
 ## NGINX proxy with module
 
@@ -123,3 +123,6 @@ Puppet Client: 10.1.1.41 puppetclient.local.aphios.ro domain.com ext.domain.com
         ```
 
 The file location of the puppet module is in /etc/puppetlabs/code/environments/production/manifests/site.pp for ease of implementation in this short time. It could be as well a separate module inside it's own directory with the manifests subdirectory.
+
+Added passive healthcheck.
+Cannot add active healthcheck as I don't have NGINX plus. But is as easly to implement as the passive ones using the `healthceck` directive.
