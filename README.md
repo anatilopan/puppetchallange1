@@ -12,8 +12,14 @@ Deadline 2023-01-20T15:00:00+02:00
 
 ## Notes
 
+The entire setup was created and tested on my private test environment using two temporary virtual machines and my dns server and firewall to communicate with the internet. Everything should work on your environment as well but I cannot guarantee it.
+
 - Puppet Server: 10.1.1.40 puppetserver.local.aphios.ro
 - Puppet Client: 10.1.1.41 puppetclient.local.aphios.ro domain.com ext.domain.com
+- Random django webserver: 10.10.10.10 webdev.testenv.aphios.ro
+- simple vm with nc listening on port 443: 20.20.20.20 dummyserver.local.aphios.ro
+
+Even if not all servers are required for this exercise, I wanted to be sure that everything works. My experience with nginx management is trough it's config files and Ansible.
 
 ## NGINX proxy with module
 
